@@ -1,9 +1,10 @@
 import random
-from greed.Common.point import Point
-from greed.Common.color import Color
-from greed.Actors.actor import Actor
-from greed.Actors.rock import Rock
-from greed.Actors.gem import Gem
+from Greed.Common.point import Point
+from Greed.Common.color import Color
+from Greed.Actors.actor import Actor
+from Greed.Actors.rock import Rock
+from Greed.Actors.gem import Gem
+
 
 class Director():
     """
@@ -14,9 +15,10 @@ class Director():
         Manage the update phase of the game (update positions, collisions, points, etc)
         Manage the output phase of the game (show updated positions in preparation for next move)
     """
+
     def __init__(self, keyboard_service, video_service, rows, cols, cell_size, font_size):
         """Constructs a new Director using the specified keyboard and video services.
-        
+
         Args:
             keyboard_service (KeyboardService): An instance of KeyboardService.
             video_service (VideoService): An instance of VideoService.
@@ -28,7 +30,7 @@ class Director():
         self._cell_size = cell_size
         self._font_size = font_size
         self._score = 0
-        
+
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
 
@@ -44,17 +46,17 @@ class Director():
 
     def _get_inputs(self, cast):
         """Gets directional input from the keyboard and applies it to the robot.
-        
+
         Args:
             cast (Cast): The cast of actors.
         """
         robot = cast.get_first_actor("robots")
         velocity = self._keyboard_service.get_direction()
-        robot.set_velocity(velocity)        
+        robot.set_velocity(velocity)
 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
-        
+
         Args:
             cast (Cast): The cast of actors.
         """
@@ -63,8 +65,8 @@ class Director():
         gems = cast.get_actors("gems")
         rocks = cast.get_actors("rocks")
 
-        new_rocks = random.randint(-10,2)
-        new_gems = random.randint(-10,2)
+        new_rocks = random.randint(-10, 2)
+        new_gems = random.randint(-10, 2)
         if new_rocks < 0:
             new_rocks = 0
         if new_gems < 0:
@@ -79,7 +81,7 @@ class Director():
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
-        
+
         for gem in gems:
             gem.move_next(max_x, max_y)
             if robot.get_position().equals(gem.get_position()):
@@ -100,11 +102,11 @@ class Director():
             if position.get_y() >= max_y:
                 cast.remove_actor("rocks", rock)
 
-        banner.set_text(f"Score: {self._score}")  
-        
+        banner.set_text(f"Score: {self._score}")
+
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
-        
+
         Args:
             cast (Cast): The cast of actors.
         """

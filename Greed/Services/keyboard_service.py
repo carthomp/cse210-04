@@ -1,5 +1,6 @@
 import pyray
-from greed.Common.point import Point
+from Greed.Common.point import Point
+
 
 class KeyboardService():
     """
@@ -7,9 +8,10 @@ class KeyboardService():
     Specifics -
         Get a direction from the currently pressed key
     """
-    def __init__(self, cell_size = 1):
+
+    def __init__(self, cell_size=1):
         """Constructs a new KeyboardService using the specified cell size.
-        
+
         Args:
             cell_size (int): The size of a cell in the display grid.
         """
@@ -26,13 +28,11 @@ class KeyboardService():
 
         if pyray.is_key_down(pyray.KEY_LEFT):
             dx = -1
-        
+
         if pyray.is_key_down(pyray.KEY_RIGHT):
             dx = 1
-        
-       
 
         direction = Point(dx, dy)
         direction = direction.scale(self._cell_size)
-        
+
         return direction
