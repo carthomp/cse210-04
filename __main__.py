@@ -18,18 +18,18 @@ Things we need to do in main:
 """
 import random
 
-from greed.Directors.director import Director
+from Greed.Directors.director import Director
 
-from greed.Actors.actor import Actor
-from greed.Actors.gem import Gem
-from greed.Actors.rock import Rock
-from greed.Actors.cast import Cast
+from Greed.Actors.actor import Actor
+from Greed.Actors.gem import Gem
+from Greed.Actors.rock import Rock
+from Greed.Actors.cast import Cast
 
-from greed.Services.keyboard_service import KeyboardService
-from greed.Services.video_service import VideoService
+from Greed.Services.keyboard_service import KeyboardService
+from Greed.Services.video_service import VideoService
 
-from greed.Common.point import Point
-from greed.Common.color import Color
+from Greed.Common.point import Point
+from Greed.Common.color import Color
 
 
 FRAME_RATE = 6
@@ -44,10 +44,10 @@ WHITE = Color(255, 255, 255)
 
 
 def main():
-    
+
     # create the cast
     cast = Cast()
-    
+
     # create the banner
     banner = Actor()
     banner.set_text("")
@@ -55,7 +55,7 @@ def main():
     banner.set_color(WHITE)
     banner.set_position(Point(CELL_SIZE, 0))
     cast.add_actor("banners", banner)
-    
+
     # create the robot
     x = int(MAX_X / 2)
     y = MAX_Y - CELL_SIZE
@@ -67,11 +67,12 @@ def main():
     robot.set_color(WHITE)
     robot.set_position(position)
     cast.add_actor("robots", robot)
-    
+
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
     video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
-    director = Director(keyboard_service, video_service, ROWS, COLS, CELL_SIZE, FONT_SIZE)
+    director = Director(keyboard_service, video_service,
+                        ROWS, COLS, CELL_SIZE, FONT_SIZE)
     director.start_game(cast)
 
 
