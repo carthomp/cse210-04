@@ -1,5 +1,9 @@
 # Greed Design
+
+```
 For Greed:
+
+
 Directing
 --+ Director
     Responsibility: Direct the order of the steps of the game
@@ -28,3 +32,5 @@ Shared
 --+ Point
     Responsibility: Show and keep information about the X,Y position
     Relationship: Used by Actors and Director to keep track of where an Actor is on screen
+    
+```
